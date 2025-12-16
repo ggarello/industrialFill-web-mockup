@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Máquinas de Llenado para Bebidas Carbonatadas | Soluciones Industriales</title>
+    <title>Carbonated Beverage Filling Machines | Industrial Solutions</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
@@ -471,6 +471,143 @@
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
         }
 
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.4s ease-out;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #6b7280;
+            transition: color 0.3s;
+            background: none;
+            border: none;
+            line-height: 1;
+        }
+
+        .close-modal:hover {
+            color: #1a1a1a;
+        }
+
+        .modal-content h2 {
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-content p {
+            color: #6b7280;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.9rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .submit-message {
+            display: none;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .submit-message.success {
+            background: #d1fae5;
+            color: #065f46;
+            display: block;
+        }
+
+        .submit-message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            display: block;
+        }
+
         /* Footer */
         footer {
             background: #1a1a1a;
@@ -513,6 +650,10 @@
             .trust-stats {
                 gap: 3rem;
             }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -521,85 +662,85 @@
     <nav class="navbar">
         <div class="logo">IndustrialFill</div>
         <ul class="nav-links">
-            <li><a href="#productos">Productos</a></li>
-            <li><a href="#beneficios">Beneficios</a></li>
-            <li><a href="#especificaciones">Especificaciones</a></li>
-            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#benefits">Benefits</a></li>
+            <li><a href="#specifications">Specifications</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
-        <a href="#contacto" class="btn-primary">Solicitar cotización</a>
+        <button class="btn-primary" onclick="openModal()">Request Quote</button>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Máquinas de llenado para<br>bebidas carbonatadas</h1>
-            <p class="hero-subtitle">Precisión y velocidad para productores industriales y artesanales.</p>
+            <h1>Carbonated Beverage<br>Filling Machines</h1>
+            <p class="hero-subtitle">Precision and speed for industrial and craft producers.</p>
             
             <div class="hero-features">
                 <div class="hero-feature">
                     <span class="hero-feature-icon">⚙️</span>
-                    <span>Hasta 28.000 botellas/hora</span>
+                    <span>Up to 28,000 bottles/hour</span>
                 </div>
                 <div class="hero-feature">
                     <span class="hero-feature-icon">💨</span>
-                    <span>Control preciso de carbonatación</span>
+                    <span>Precise carbonation control</span>
                 </div>
                 <div class="hero-feature">
                     <span class="hero-feature-icon">🔄</span>
-                    <span>Cambio rápido de formatos</span>
+                    <span>Quick format changeover</span>
                 </div>
             </div>
 
             <div class="hero-buttons">
-                <a href="#contacto" class="btn-primary">🟦 Solicitar cotización</a>
-                <a href="#especificaciones" class="btn-secondary">Ver ficha técnica</a>
+                <button class="btn-primary" onclick="openModal()">🟦 Request Quote</button>
+                <a href="#specifications" class="btn-secondary">View Technical Sheet</a>
             </div>
         </div>
     </section>
 
     <!-- Target Audience Section -->
-    <section class="target-audience" id="productos">
-        <h2 class="section-title">¿Para quién es esta máquina?</h2>
-        <p class="section-subtitle">Soluciones adaptadas a cada tipo de productor</p>
+    <section class="target-audience" id="products">
+        <h2 class="section-title">Who is this machine for?</h2>
+        <p class="section-subtitle">Solutions tailored to every type of producer</p>
         
         <div class="cards-grid">
             <div class="card">
                 <span class="card-icon">🥤</span>
-                <h3>Productores de bebidas gaseosas</h3>
-                <p>Escalabilidad industrial y alta eficiencia para líneas de producción de gran volumen.</p>
+                <h3>Soft Drink Producers</h3>
+                <p>Industrial scalability and high efficiency for high-volume production lines.</p>
             </div>
             
             <div class="card">
                 <span class="card-icon">🍺</span>
-                <h3>Cervecerías artesanales</h3>
-                <p>Control fino del gas y preservación del sabor para mantener la calidad artesanal.</p>
+                <h3>Craft Breweries</h3>
+                <p>Fine gas control and flavor preservation to maintain artisanal quality.</p>
             </div>
             
             <div class="card">
                 <span class="card-icon">💧</span>
-                <h3>Agua carbonatada</h3>
-                <p>Llenado estable y consistente con niveles de carbonatación precisos.</p>
+                <h3>Carbonated Water</h3>
+                <p>Stable and consistent filling with precise carbonation levels.</p>
             </div>
         </div>
     </section>
 
     <!-- Benefits Section -->
-    <section class="benefits" id="beneficios">
+    <section class="benefits" id="benefits">
         <div class="benefits-content">
             <div class="benefits-text">
-                <h2 class="section-title" style="text-align: left;">Diseñada para rendimiento<br>y confiabilidad</h2>
+                <h2 class="section-title" style="text-align: left;">Designed for performance<br>and reliability</h2>
                 <ul class="benefits-list">
                     <li>
-                        <span>Reducción de espuma y pérdidas de producto gracias al sistema de llenado isobárico</span>
+                        <span>Reduced foam and product loss thanks to isobaric filling system</span>
                     </li>
                     <li>
-                        <span>Construcción en acero inoxidable grado alimenticio 316L para máxima higiene</span>
+                        <span>Food-grade 316L stainless steel construction for maximum hygiene</span>
                     </li>
                     <li>
-                        <span>Integración sencilla con líneas existentes sin modificaciones mayores</span>
+                        <span>Easy integration with existing lines without major modifications</span>
                     </li>
                     <li>
-                        <span>Mantenimiento simple y bajo costo operativo con piezas estándar</span>
+                        <span>Simple maintenance and low operating cost with standard parts</span>
                     </li>
                 </ul>
             </div>
@@ -609,80 +750,80 @@
 
     <!-- Process Section -->
     <section class="process">
-        <h2 class="section-title">¿Cómo funciona?</h2>
-        <p class="section-subtitle">Sistema de 4 pasos para llenado perfecto</p>
+        <h2 class="section-title">How does it work?</h2>
+        <p class="section-subtitle">4-step system for perfect filling</p>
         
         <div class="process-steps">
             <div class="process-step">
                 <div class="process-number">1</div>
-                <h3>Carbonatación precisa</h3>
-                <p>Control digital del nivel de CO₂ según tipo de bebida</p>
+                <h3>Precise Carbonation</h3>
+                <p>Digital control of CO₂ level according to beverage type</p>
             </div>
             
             <div class="process-step">
                 <div class="process-number">2</div>
-                <h3>Llenado isobárico</h3>
-                <p>Presurización previa para evitar pérdida de gas</p>
+                <h3>Isobaric Filling</h3>
+                <p>Pre-pressurization to prevent gas loss</p>
             </div>
             
             <div class="process-step">
                 <div class="process-number">3</div>
-                <h3>Control de nivel</h3>
-                <p>Sensores ópticos garantizan llenado consistente</p>
+                <h3>Level Control</h3>
+                <p>Optical sensors ensure consistent filling</p>
             </div>
             
             <div class="process-step">
                 <div class="process-number">4</div>
-                <h3>Taponado seguro</h3>
-                <p>Sellado hermético sin contaminación externa</p>
+                <h3>Secure Capping</h3>
+                <p>Hermetic sealing without external contamination</p>
             </div>
         </div>
     </section>
 
     <!-- Specifications Section -->
-    <section class="specifications" id="especificaciones">
-        <h2 class="section-title">Especificaciones técnicas</h2>
-        <p class="section-subtitle">Características principales de nuestros equipos</p>
+    <section class="specifications" id="specifications">
+        <h2 class="section-title">Technical Specifications</h2>
+        <p class="section-subtitle">Main features of our equipment</p>
         
         <div class="specs-table">
             <table>
                 <thead>
                     <tr>
-                        <th>Característica</th>
-                        <th>Detalle</th>
+                        <th>Feature</th>
+                        <th>Details</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Capacidad</td>
-                        <td>Hasta 28.000 BPH</td>
+                        <td>Capacity</td>
+                        <td>Up to 28,000 BPH</td>
                     </tr>
                     <tr>
-                        <td>Tipos de botella</td>
-                        <td>PET / Vidrio</td>
+                        <td>Bottle Types</td>
+                        <td>PET / Glass</td>
                     </tr>
                     <tr>
-                        <td>N° de válvulas</td>
+                        <td>Number of Valves</td>
                         <td>Configurable (32 / 48 / 64)</td>
                     </tr>
                     <tr>
-                        <td>Nivel de automatización</td>
-                        <td>Semi / Full automático</td>
+                        <td>Automation Level</td>
+                        <td>Semi / Full Automatic</td>
                     </tr>
                     <tr>
-                        <td>Material construcción</td>
-                        <td>Acero inoxidable 316L</td>
+                        <td>Construction Material</td>
+                        <td>316L Stainless Steel</td>
                     </tr>
                     <tr>
-                        <td>Rango de llenado</td>
+                        <td>Filling Range</td>
                         <td>200ml - 2000ml</td>
                     </tr>
                     <tr>
-                        <td>Consumo energético</td>
+                        <td>Power Consumption</td>
                         <td>15-25 kW</td>
                     </tr>
                     <tr>
-                        <td>Dimensiones</td>
+                        <td>Dimensions</td>
                         <td>4.5m x 2.8m x 2.2m</td>
                     </tr>
                 </tbody>
@@ -690,101 +831,118 @@
         </div>
         
         <div class="download-btn">
-            <a href="#" class="btn-primary" onclick="alert('Descarga de PDF - Implementar según necesidad')">⬇️ Descargar ficha técnica en PDF</a>
+            <a href="#" class="btn-primary" onclick="alert('PDF Download - To be implemented')">⬇️ Download Technical Sheet PDF</a>
         </div>
     </section>
 
     <!-- Gallery Section -->
     <section class="gallery">
-        <h2 class="section-title">Galería y videos</h2>
-        <p class="section-subtitle">Vea nuestra máquina en acción</p>
+        <h2 class="section-title">Gallery & Videos</h2>
+        <p class="section-subtitle">See our machine in action</p>
         
         <div class="gallery-grid">
             <div class="gallery-item">📸</div>
             <div class="gallery-item">📸</div>
             <div class="gallery-item">📸</div>
-            <div class="gallery-item video">▶️<br><small style="font-size: 1rem;">Video 30s</small></div>
+            <div class="gallery-item video">▶️<br><small style="font-size: 1rem;">30s Video</small></div>
         </div>
     </section>
 
     <!-- Trust Section -->
     <section class="trust">
-        <h2 class="section-title">Confianza respaldada por resultados</h2>
+        <h2 class="section-title">Trust backed by results</h2>
         <div class="trust-stats">
             <div class="trust-stat">
                 <span class="trust-number">250+</span>
-                <span class="trust-label">Líneas instaladas</span>
+                <span class="trust-label">Lines Installed</span>
             </div>
             <div class="trust-stat">
                 <span class="trust-number">35</span>
-                <span class="trust-label">Países</span>
+                <span class="trust-label">Countries</span>
             </div>
             <div class="trust-stat">
                 <span class="trust-number">15</span>
-                <span class="trust-label">Años de experiencia</span>
+                <span class="trust-label">Years of Experience</span>
             </div>
         </div>
     </section>
 
     <!-- Final CTA Section -->
-    <section class="final-cta" id="contacto">
-        <h2>¿Listo para optimizar tu línea de producción?</h2>
-        <p>Solicita una cotización personalizada y descubre cómo nuestras máquinas pueden transformar tu operación.</p>
-        <a href="#" class="btn-primary" onclick="alert('Formulario de contacto - Implementar según necesidad')">🟦 Solicitar cotización personalizada</a>
+    <section class="final-cta" id="contact">
+        <h2>Ready to optimize your production line?</h2>
+        <p>Request a personalized quote and discover how our machines can transform your operation.</p>
+        <button class="btn-primary" onclick="openModal()">🟦 Request Personalized Quote</button>
     </section>
+
+    <!-- Modal Quote Form -->
+    <div id="cotizacionModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <h2>Request a Quote</h2>
+            <p>Complete the form and we'll contact you within 24 hours.</p>
+            
+            <div id="submitMessage" class="submit-message"></div>
+            
+            <form id="cotizacionForm" onsubmit="handleSubmit(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Name *</label>
+                        <input type="text" name="nombre" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label>Company *</label>
+                        <input type="text" name="empresa" required placeholder="My Company Inc.">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" name="email" required placeholder="contact@company.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" name="telefono" placeholder="+1 555 123-4567">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Country *</label>
+                    <input type="text" name="pais" required placeholder="United States">
+                </div>
+                
+                <div class="form-group">
+                    <label>Product Type *</label>
+                    <select name="tipoProducto" required>
+                        <option value="">Select...</option>
+                        <option value="soft-drinks">Soft Drinks</option>
+                        <option value="craft-beer">Craft Beer</option>
+                        <option value="carbonated-water">Carbonated Water</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Required Capacity (BPH) *</label>
+                    <select name="capacidad" required>
+                        <option value="">Select...</option>
+                        <option value="0-5000">Up to 5,000 BPH</option>
+                        <option value="5000-10000">5,000 - 10,000 BPH</option>
+                        <option value="10000-20000">10,000 - 20,000 BPH</option>
+                        <option value="20000+">More than 20,000 BPH</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Additional Message</label>
+                    <textarea name="mensaje" placeholder="Tell us more about your project..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn-primary" style="width: 100%;">Submit Request</button>
+            </form>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 IndustrialFill. Todos los derechos reservados. | Máquinas de llenado para bebidas carbonatadas</p>
-    </footer>
-
-    <script>
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe cards and sections
-        document.querySelectorAll('.card, .process-step, .gallery-item').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'all 0.6s ease-out';
-            observer.observe(el);
-        });
-
-        // Navbar background on scroll
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 100) {
-                navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
-            } else {
-                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.08)';
-            }
-        });
-    </script>
-</body>
-</html>
+        <p>&copy; 2025 IndustrialFill.
